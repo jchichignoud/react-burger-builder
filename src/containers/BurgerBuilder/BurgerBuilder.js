@@ -1,7 +1,6 @@
 import React, {
     Component
 } from 'react';
-import Auxiliary from '../../hoc/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
@@ -102,18 +101,20 @@ class BurgerBuilder extends Component {
         // }
 
         return (
-            <Auxiliary>
-                <Modal show={this.state.showOrder} hideOrder={this.hideOrderHandler}>
+            [
+                <Modal key='1' show={this.state.showOrder} hideOrder={this.hideOrderHandler}>
                     <OrderSummary
                         ingredients = {this.state.ingredients}
                         hideOrder = {this.hideOrderHandler}
                         purchase = {this.purchaseOrder}
                         totalPrice = {totalPriceComputed}/>
-                </Modal> 
+                </Modal>, 
                 <Burger
+                    key='2'
                     ingredients = {this.state.ingredients}
-                />
+                />,
                 <BuildControls 
+                    key='3'
                     ingredientAdded = {this.addIngredientHandler}
                     ingredientRemoved = {this.removeIngredientHandler}
                     ingredients = {this.state.ingredients}
@@ -121,7 +122,7 @@ class BurgerBuilder extends Component {
                     purchasable={this.state.isPurchasable}
                     showOrder={this.showOrderHandler}
                 />
-            </Auxiliary>
+            ]
         );
     }
 }
